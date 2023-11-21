@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3'
+    }
+
+    stages {
+        stage('Clone Code') {
+            steps {
+                git 'https://github.com/UdayLabishetty/my_proj.git'
+                echo 'Data Cloned Successfully'
+            }
+        }
+        stage('Build Project') {
+            steps {
+                bat 'mvn install'
+                echo 'Project build successfully'
+            }
+        }
+    }
+
+    triggers {
+        cron('*/1 * * * *')
+    }
+}
